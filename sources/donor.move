@@ -9,17 +9,18 @@ module charifun::donor {
   struct Donor has key, store {
     id: UID,
     name: String,
-    email: String,
+    hash_email: vector<u8>,
     amount_donated: u64,
     donations_count: u64,
     frame: Option<ID>,
   }
 
   public fun create(name: String, email: String, ctx: &mut TxContext) {
+    let hash_email = hash(&email);
     let donor = Donor {
       id: object::new(ctx),
       name,
-      email,
+      hash_email,
       amount_donated: 0u64,
       donations_count: 0u64,
       frame: option::none(),
@@ -32,8 +33,9 @@ module charifun::donor {
     &donor.name
   }
 
-  public fun email(donor: &Donor): &String {
-    &donor.email
+  public fun hash(email: &String): vector<u8> {
+    let hash :vector<u8> = std::hash::sha3_256(*std::string::bytes(email));
+    hash
   }
 
   public fun amount_donated(donor: &Donor): u64 {
@@ -48,6 +50,8 @@ module charifun::donor {
     &donor.frame
   }
 
-
+  public fun hash_email(donor: &Donor): &vector<u8> {
+    &donor.hash_email
+  }
 
 }
