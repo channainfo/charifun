@@ -8,4 +8,4 @@
 - Famehall is assigned to donor based on the amount ( starter)
 - DonationTier can be many level ( small, medium, max, elite, custom) that come built in with a value.
 - Once donated, donor gets accumulated the amount of donation and fame is calculated and a Donation(donor, amount, campaign) is creator and a cert is issued
-- List of donors is availables.
+- display list of donors and donations for public
