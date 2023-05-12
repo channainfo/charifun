@@ -17,7 +17,7 @@ module charifun::donor_test {
     {
       let ctx = test_scenario::ctx(&mut scenario);
       let name = utf8(b"Monika Ly");
-      let email = utf8(b"csr@monik.org");
+      let email = utf8(b"admin@monik.org");
 
       donor::create(name, email, ctx);
     };
@@ -28,10 +28,14 @@ module charifun::donor_test {
       let donor = test_scenario::take_from_sender<Donor>(&mut scenario);
 
       assert!(donor::name(&donor) == &utf8(b"Monika Ly"), 0);
-      assert!(donor::email(&donor) == &utf8(b"csr@monik.org"), 0);
       assert!(donor::amount_donated(&donor) == 0u64, 0);
       assert!(option::is_none<ID>(donor::frame(&donor)), 0);
 
+      let email = utf8(b"admin@monik.org");
+      let hash_email = donor::hash(&email);
+      std::debug::print<vector<u8>>(&hash_email);
+
+      assert!(hash_email == *donor::hash_email(&donor), 0);
       test_scenario::return_to_sender(&mut scenario, donor);
     };
 

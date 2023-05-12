@@ -9,3 +9,9 @@
 - DonationTier can be many level ( small, medium, max, elite, custom) that come built in with a value.
 - Once donated, donor gets accumulated the amount of donation and fame is calculated and a Donation(donor, amount, campaign) is creator and a cert is issued
 - display list of donors and donations for public
+
+## References
+
+### SUI
+
+- The move lang stdlib: <https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/packages/move-stdlib/sources>
