@@ -15,3 +15,5 @@
 ### SUI
 
 - The move lang stdlib: <https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/packages/move-stdlib/sources>
+- SUI Example: <https://examples.sui.io/basics/events.html>
+- Time: <https://docs.sui.io/build/move/time>
