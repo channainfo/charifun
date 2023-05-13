@@ -15,10 +15,13 @@ module charifun::donor {
     frame: Option<ID>,
   }
 
-  public fun create(name: String, email: String, ctx: &mut TxContext) {
+  public fun create(name: String, email: String, ctx: &mut TxContext): ID {
     let hash_email = hash(&email);
+    let id = object::new(ctx);
+    let inner_id = object::uid_to_inner(&id);
+
     let donor = Donor {
-      id: object::new(ctx),
+      id: id,
       name,
       hash_email,
       amount_donated: 0u64,
@@ -27,6 +30,7 @@ module charifun::donor {
     };
 
     transfer(donor, tx_context::sender(ctx));
+    inner_id
   }
 
   public fun name(donor: &Donor): &String {

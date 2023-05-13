@@ -1,6 +1,6 @@
 #[test_only]
-module charifun::charity_test {
-  use charifun::charity;
+module charifun::sum_test {
+  use charifun::sum;
   use std::debug;
 
   #[test]
@@ -8,7 +8,7 @@ module charifun::charity_test {
     let a: u32 = 10u32;
     let b: u32 =  20u32;
 
-    let result = charity::sum(a, b);
+    let result = sum::sum(a, b);
 
     debug::print(&result);
     assert!(result == 30u32, 0);
