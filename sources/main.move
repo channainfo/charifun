@@ -2,9 +2,9 @@ module charifun::main {
   use sui::tx_context::TxContext;
   use std::string::String;
 
-  use charifun::cap::{Self};
-
+  use charifun::cap::{Self, PackageOwnerCap};
   use charifun::donor;
+  use charifun::donor_board;
 
   fun init(ctx: &mut TxContext) {
     cap::io_create_package_owner_cap(ctx);
@@ -12,6 +12,10 @@ module charifun::main {
 
   public entry fun create_donor(name: String, email: String, ctx: &mut TxContext) {
     donor::create(name, email, ctx);
+  }
+
+  public entry fun setup(_owner: &PackageOwnerCap, ctx: &mut TxContext) {
+    donor_board::create(ctx);
   }
 
   #[test]
