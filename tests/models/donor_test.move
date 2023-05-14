@@ -33,7 +33,6 @@ module charifun::donor_test {
 
       let email = utf8(b"admin@monik.org");
       let hash_email = donor::hash(&email);
-      std::debug::print<vector<u8>>(&hash_email);
 
       assert!(hash_email == *donor::hash_email(&donor), 0);
       test_scenario::return_to_sender(&mut scenario, donor);
