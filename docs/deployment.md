@@ -1,24 +1,50 @@
-# Get Started
+# Deployment
 
-## Concept
-
-- Everyone can register to become a donor with name, email, amount_donated, frequncy_donated, current_frame ( HATCHLING, NESTLING, CHICK, FLEDGLING, BIRD < JUVENILE, IMMATURE, ADULT > )
-- Compaign (name, desc, expected value, current_receive, start_date, end_date, fixed, max, period)
-- Certificate Different level with (max_number, date_minted )
-- Famehall is assigned to donor based on the amount ( starter)
-- DonationTier can be many level ( small, medium, max, elite, custom) that come built in with a value.
-- Once donated, donor gets accumulated the amount of donation and fame is calculated and a Donation(donor, amount, campaign) is creator and a cert is issued
-- display list of donors and donations for public
-
-## Test the app
-
-1. Copy the seed phrase from docs/test-seed.txt and import to your SUI wallet.
-2. In the sui wallet, switch to devnet
-3. Request Devnet SUI tokens
-4. Run command publish
+## Generate and activate a wallet
 
 ```sh
-> sui client publish --gas-budget 30000000
+sui client new-address ed25519
+```
+
+SUI will generate a new address + a **Secret Recovery Phrase** and add to SUI client automatically (~/.sui/sui_config/client.yaml and ~/.sui/sui_config/sui.keystore). Don't forget to copy the **Secret Recovery Phrase** you need it for a SUI wallet browser extension.
+
+Now activate your wallet to use in the sui client CLI
+
+```sh
+sui client switch --address your_newly_created_at
+sui client active-address
+
+sui client switch --env devnet
+sui client active-env
+
+sui client addresses
+```
+
+## Working with a SUI wallet
+
+Download and install a SUI wallet extension for your favorite brower, for example, Google Chrome.
+Once installed, create a wallet address by importing the **Secret Recovery Phrase**.
+
+In the wallet:
+
+1. Switch to devnet
+2. Request SUI token
+3. Check your SUI token with:
+
+```sh
+sui client gas
+
+```
+
+## Publish
+
+```sh
+ sui client publish --gas-budget 30000000
+```
+
+output
+
+```sh
 UPDATING GIT DEPENDENCY https://github.com/MystenLabs/sui.git
 INCLUDING DEPENDENCY Sui
 INCLUDING DEPENDENCY MoveStdlib
@@ -112,6 +138,7 @@ Array [
         "amount": String("-26568680"),
     },
 ]
+
 ```
 
 You might need the following:
@@ -120,25 +147,3 @@ You might need the following:
 - UpgradeCap: 0x27393b17e555a4d60713e53b1ab83d6e0c3207857c517454efdcfce447cfc551
 - PackageOwnerCap: 0xc552820c1e8b8475d113f7f40a99afc18df7c9be3d7085d0e63b7f80a60e9133
 - Sender(you): 0xba841936a6f94c56efa97156f49479396e92fcf6395d5f80aaa93843542389ed
-
-After I run the setup entry in the explor, I've got back:
-
-```sh
-Digest F7oSxiyjFDzg2Fom7c3Na74VJ4CvVoA9p6yjZ6Bg89ni
-Created 0x387c1fa39d32808ca28dce1eb12ffe91e9c1bbbfb123b67fdfff0db3668a8d23
-Updated
-0x487ed2bd43d45a3c646b91f644bbfa7c73d1e1d26b2570d66da2eecdad3508af
-0xc552820c1e8b8475d113f7f40a99afc18df7c9be3d7085d0e63b7f80a60e9133
-```
-
-If you go to <https://suiexplorer.com/object/0xcd77a2ff42f5bec877c17bec9dde051c15103195083e2deaa34ad93cddd8a30b?module=main&network=devnet>, you might observe in the transaction section you will see the very first one is the one from the setup call.
-
-Click on the tx(the very first one): <https://suiexplorer.com/txblock/F7oSxiyjFDzg2Fom7c3Na74VJ4CvVoA9p6yjZ6Bg89ni?network=devnet>, You will see the tx details. In our case we are only interested in the object created in this case the donor board which has been created with shared object: <https://suiexplorer.com/object/0x387c1fa39d32808ca28dce1eb12ffe91e9c1bbbfb123b67fdfff0db3668a8d23?network=devnet>
-
-## References
-
-### SUI
-
-- The move lang stdlib: <https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/packages/move-stdlib/sources>
-- SUI Example: <https://examples.sui.io/basics/events.html>
-- Time: <https://docs.sui.io/build/move/time>

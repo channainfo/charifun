@@ -1,7 +1,6 @@
 #[test_only]
 module charifun::sum_test {
   use charifun::sum;
-  use std::debug;
 
   #[test]
   public fun sum_test() {
@@ -9,9 +8,6 @@ module charifun::sum_test {
     let b: u32 =  20u32;
 
     let result = sum::sum(a, b);
-
-    debug::print(&result);
     assert!(result == 30u32, 0);
-
   }
 }
