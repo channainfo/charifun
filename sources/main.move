@@ -4,7 +4,6 @@ module charifun::main {
 
   use charifun::cap::{Self, PackageOwnerCap};
   use charifun::donor;
-  use charifun::donor_board;
 
   fun init(ctx: &mut TxContext) {
     cap::io_create_package_owner_cap(ctx);
@@ -15,7 +14,9 @@ module charifun::main {
   }
 
   public entry fun setup(_owner: &PackageOwnerCap, ctx: &mut TxContext) {
-    donor_board::create(ctx);
+    // one timed called
+    charifun::donor_board::create(ctx);
+    charifun::donation_board::create(ctx);
   }
 
   #[test]
