@@ -2,7 +2,7 @@
 
 ## Concept
 
-- Everyone can register to become a donor with name, email, amount_donated, frequncy_donated, current_frame ( HATCHLING, NESTLING, CHICK, FLEDGLING, BIRD < JUVENILE, IMMATURE, ADULT > )
+- Everyone can register to become a donor with name, email, amount_donated, frequncy_donated, current_fame ( HATCHLING, NESTLING, CHICK, FLEDGLING, BIRD < JUVENILE, IMMATURE, ADULT > )
 - Compaign (name, desc, expected value, current_receive, start_date, end_date, fixed, max, period)
 - Certificate Different level with (max_number, date_minted )
 - Famehall is assigned to donor based on the amount ( starter)
@@ -140,5 +140,7 @@ Click on the tx(the very first one): <https://suiexplorer.com/txblock/F7oSxiyjFD
 ### SUI
 
 - The move lang stdlib: <https://github.com/MystenLabs/sui/tree/main/crates/sui-framework/packages/move-stdlib/sources>
+- Framework: <https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/dynamic_object_field.move>
 - SUI Example: <https://examples.sui.io/basics/events.html>
 - Time: <https://docs.sui.io/build/move/time>
+- Test: <https://github.com/MystenLabs/sui/blob/main/crates/sui-framework/packages/sui-framework/sources/test/test_scenario.move#L209>

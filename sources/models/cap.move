@@ -7,7 +7,7 @@ module charifun::cap {
     id: UID,
   }
 
-  public fun io_create_package_owner_cap(ctx: &mut TxContext) {
+  public fun init_create_package_owner_cap(ctx: &mut TxContext) {
     let admin_cap = PackageOwnerCap {
       id: object::new(ctx)
     };
