@@ -3,20 +3,19 @@ module charifun::main {
   use std::string::String;
 
   use charifun::cap::{Self, PackageOwnerCap};
-  use charifun::donor;
+  use charifun::donable::{Self, DonorBoard};
 
   fun init(ctx: &mut TxContext) {
-    cap::io_create_package_owner_cap(ctx);
-  }
-
-  public entry fun create_donor(name: String, email: String, ctx: &mut TxContext) {
-    donor::create(name, email, ctx);
+    cap::init_create_package_owner_cap(ctx);
   }
 
   public entry fun setup(_owner: &PackageOwnerCap, ctx: &mut TxContext) {
     // one timed called
-    charifun::donor_board::create(ctx);
-    charifun::donation_board::create(ctx);
+    donable::init_donor_board(ctx);
+  }
+
+  public entry fun register_donor(name: String, email: String, board: &mut DonorBoard, ctx: &mut TxContext): bool {
+    donable::register_donor(name, email, board, ctx)
   }
 
   #[test]
