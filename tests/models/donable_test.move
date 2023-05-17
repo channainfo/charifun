@@ -34,6 +34,7 @@ module charifun::donable_test {
     use std::string::{Self};
     use std::option;
     use charifun::donable::{Self, DonorBoard, Donor};
+    use charifun::libs;
 
     let owner = @0x001;
     let scenario = test_scenario::begin(owner);
@@ -65,7 +66,7 @@ module charifun::donable_test {
       let board = test_scenario::take_shared<DonorBoard>(& scenario);
       let name = string::utf8(b"Monika");
       let email = string::utf8(b"admin@monik.org");
-      let hash_email = donable::hash(&email);
+      let hash_email = libs::hash(&email);
 
       // board is now has donors_count
       assert!(donable::donors_count(&board) == 1, 0);

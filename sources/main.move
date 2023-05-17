@@ -9,13 +9,13 @@ module charifun::main {
     cap::init_create_package_owner_cap(ctx);
   }
 
-  public entry fun register_donor(name: String, email: String, board: &mut DonorBoard, ctx: &mut TxContext): bool {
-    donable::register_donor(name, email, board, ctx)
-  }
-
   public entry fun setup(_owner: &PackageOwnerCap, ctx: &mut TxContext) {
     // one timed called
     donable::init_donor_board(ctx);
+  }
+
+  public entry fun register_donor(name: String, email: String, board: &mut DonorBoard, ctx: &mut TxContext): bool {
+    donable::register_donor(name, email, board, ctx)
   }
 
   #[test]

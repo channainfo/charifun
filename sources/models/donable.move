@@ -7,6 +7,8 @@ module charifun::donable {
   use std::string::{String};
   use std::option::{Self, Option};
 
+  use charifun::libs::{ Self };
+
   struct DonorBoard has key, store{
     id: UID,
     donors_count: u64,
@@ -43,10 +45,6 @@ module charifun::donable {
     amount: u64,
   }
 
-  public fun name(donor: &Donor): &String {
-    &donor.name
-  }
-
   public fun init_donor_board(ctx: &mut TxContext){
     let board = DonorBoard {
       id: object::new(ctx),
@@ -58,13 +56,13 @@ module charifun::donable {
 
   public fun register_donor(name: String, email: String, board: &mut DonorBoard, ctx: &mut TxContext): bool{
 
-    let registered = dynamic_object_field::exists_<vector<u8>>(&board.id, hash(&email));
+    let registered = dynamic_object_field::exists_<vector<u8>>(&board.id, libs::hash(&email));
 
     if(registered){
       return false
     };
 
-    let hash_email = hash(&email);
+    let hash_email = libs::hash(&email);
     let created_at = tx_context::epoch_timestamp_ms(ctx);
 
     let donor = new_donor(name, email, created_at, ctx);
@@ -87,13 +85,13 @@ module charifun::donable {
   }
 
   public fun donor_by_email(board: &DonorBoard, email: &String): &Donor {
-    let hash_email = hash(email);
+    let hash_email = libs::hash(email);
 
     dynamic_object_field::borrow<vector<u8>, Donor>(&board.id, hash_email)
   }
 
   fun new_donor(name: String, email: String, created_at: u64, ctx: &mut TxContext): Donor {
-    let hash_email = hash(&email);
+    let hash_email = libs::hash(&email);
     let id = object::new(ctx);
 
     Donor {
@@ -107,13 +105,12 @@ module charifun::donable {
     }
   }
 
-  public fun donors_count(board: &DonorBoard): u64 {
-    board.donors_count
+  public fun name(donor: &Donor): &String {
+    &donor.name
   }
 
-  public fun hash(email: &String): vector<u8> {
-    let hash :vector<u8> = std::hash::sha3_256(*std::string::bytes(email));
-    hash
+  public fun donors_count(board: &DonorBoard): u64 {
+    board.donors_count
   }
 
   public fun amount_donated(donor: &Donor): u64 {
