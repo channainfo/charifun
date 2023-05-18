@@ -3,7 +3,8 @@
 ## Concept
 
 - Everyone can register to become a donor with name, email, amount_donated, frequncy_donated, current_fame ( HATCHLING, NESTLING, CHICK, FLEDGLING, BIRD < JUVENILE, IMMATURE, ADULT > )
-- Compaign (name, desc, expected value, current_receive, start_date, end_date, fixed, max, period)
+- Compaign (name, desc, expected value, current_receive, start_date, end_date, fixed, max, period, and might have one or more taxons)
+- Taxon(name, code, type=[category, label, tag])
 - Certificate Different level with (max_number, date_minted )
 - Famehall is assigned to donor based on the amount ( starter)
 - DonationTier can be many level ( small, medium, max, elite, custom) that come built in with a value.
