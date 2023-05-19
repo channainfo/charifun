@@ -28,7 +28,6 @@ module charifun::campaignable {
     target_value: u64,
     received_value: u64,
     donations_count: u64,
-    donors_count: u64,
     owner: address,
     start_date: u64,
     end_date: u64,
@@ -76,7 +75,6 @@ module charifun::campaignable {
       target_value,
       received_value: 0u64,
       donations_count: 0u64,
-      donors_count: 0u64,
       owner,
       start_date,
       end_date,
@@ -106,10 +104,21 @@ module charifun::campaignable {
     true
   }
 
-  public fun campaign_by_code(board: &CampaignBoard, code: &String): &Campaign {
+  public fun register_donation(campaign: &mut Campaign, amount: u64) {
+    campaign.received_value = campaign.received_value + amount;
+    campaign.donations_count = campaign.donations_count + 1;
+  }
+
+  public fun find_campaign_by_code(board: &CampaignBoard, code: &String): &Campaign {
     let key = libs::hash(code);
 
     dynamic_object_field::borrow<vector<u8>, Campaign>(&board.id, key)
+  }
+
+  public fun find_campaign_by_code_mut(board: &mut CampaignBoard, code: &String): &mut Campaign {
+    let key = libs::hash(code);
+
+    dynamic_object_field::borrow_mut<vector<u8>, Campaign>(&mut board.id, key)
   }
 
   public fun campaigns_count(board: &CampaignBoard): u64 {
@@ -142,6 +151,18 @@ module charifun::campaignable {
 
   public fun end_date(campaign: &Campaign): u64 {
     campaign.end_date
+  }
+
+  public fun campaign_id(campaign: &Campaign): ID {
+    object::uid_to_inner(&campaign.id)
+  }
+
+  public fun received_value(campaign: &Campaign): u64 {
+    campaign.received_value
+  }
+
+  public fun donations_count(campaign: &Campaign): u64 {
+    campaign.donations_count
   }
 
 
