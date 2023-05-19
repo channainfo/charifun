@@ -81,7 +81,7 @@ module charifun::campaignable_test {
       let board = test_scenario::take_shared<CampaignBoard>(& scenario);
       let code :String = string::utf8(b"kantabopha-hospital-fun-5892006789");
 
-      let campaign: &Campaign = campaignable::campaign_by_code(&board, &code);
+      let campaign: &Campaign = campaignable::find_campaign_by_code(&board, &code);
 
       assert!(campaignable::code(campaign) == &string::utf8(b"kantabopha-hospital-fun-5892006789"), 0);
       assert!(campaignable::name(campaign) == &string::utf8(b"Kanthabopha Hospital Fun"), 0);
