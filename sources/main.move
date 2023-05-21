@@ -5,6 +5,7 @@ module charifun::main {
   use charifun::cap::{Self, PackageOwnerCap};
   use charifun::donable::{Self, DonorBoard};
   use charifun::campaignable::{Self, CampaignBoard};
+  use charifun::taxonomical::{Self};
 
   fun init(ctx: &mut TxContext) {
     init_package(ctx);
@@ -19,6 +20,8 @@ module charifun::main {
     donable::init_donor_board(ctx);
     donable::init_donation_board(ctx);
     campaignable::init_campaign_board(ctx);
+    taxonomical::init_taxonomy_board(ctx);
+
   }
 
   public entry fun register_donor(name: String, email: String, board: &mut DonorBoard, ctx: &mut TxContext): bool {
